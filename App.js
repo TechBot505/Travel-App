@@ -1,82 +1,94 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Dashboard, OnBoardingScreen, PersonalList, Profile, SharedList, LoginScreen } from './app/screens';
+import { View, Image, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Entypo } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
+import AuthNavigator from './app/naviagations/AuthNavigator';
+import { useState } from 'react';
+import AppIntroSlider from 'react-native-app-intro-slider'
+import { onboarding1, onboarding2, onboarding3 } from './app/constants/images';
+import { COLORS, SIZES } from './app/constants/theme';
 
-const Tab = createBottomTabNavigator();
+const slides = [
+  {
+    id: 1,
+    title: 'Title 1',
+    text: 'Say something cool',
+    image: onboarding1,
+    backgroundColor: '#59b2ab',
+  },
+  {
+    id: 2,
+    title: 'Title 2',
+    text: 'Other cool stuff',
+    image: onboarding2,
+    backgroundColor: '#febe29',
+  },
+  {
+    id: 3,
+    title: 'Rocket guy',
+    text: 'I\'m already out of descriptions\n\nLorem ipsum bla bla bla',
+    image: onboarding3,
+    backgroundColor: '#22bcb5',
+  }
+];
 
 export default function App() {
+  const [showHomePage, setShowHomePage] = useState(false);
 
-  const screenOptions = {
-    tabBarShowLabel: false,
-    headerShown: false,
-    tabBarStyle: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      elevation: 0,
-      backgroundColor: "#ffffff",
-      borderRadius: 15,
-      height: 60,
-    }
+  // StatusBar.setBarStyle('light-content', true);
+
+  const buttonLabel = (label) => {
+    return (
+      <View style={{
+          padding: 12,
+        }}
+      >
+        <Text style={{fontWeight: 'bold', fontSize: SIZES.h4}}>{label}</Text>
+      </View>
+    )
   }
 
+  if(!showHomePage) {
+    return (
+      <AppIntroSlider
+      data={slides}
+      renderItem={({ item }) => {
+        return (
+          <View style={{ 
+            flex: 1, 
+            alignItems: 'center', 
+            padding: 15,
+            paddingTop: 100
+          }}>
+            <Image 
+              source={item.image}
+              style={{
+                width: SIZES.width - 80,
+                height: 400
+              }}
+              resizeMode='contain'
+            />
+            <Text style={{fontWeight: 'bold', fontSize: SIZES.h1}}>{item.title}</Text>
+            <Text style={{textAlign: 'center', paddingTop: 5}}>{item.text}</Text>
+          </View>
+        )
+      }}
+      activeDotStyle={{
+        backgroundColor: COLORS.primary,
+        width: 30
+      }}
+      showSkipButton
+      renderNextButton={() => buttonLabel("Next")}
+      renderSkipButton={() => buttonLabel("Skip")}
+      renderDoneButton={() => buttonLabel("Done")}
+      onDone={() => {
+        setShowHomePage(true)
+      }}
+    />
+    )
+  }
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen 
-          name="Dashboard"  
-          component={Dashboard} 
-          options={{
-            tabBarIcon: ({focused}) => (
-              <View style={{alignItems: "center", justifyContent: "center"}}>
-                <Entypo name="home" size={24} color="black" />
-                <Text style={{color: focused ? "#e32f45" : "#748c94", fontSize: 12}}>Dashboard</Text>
-              </View>
-            )
-          }} 
-        />
-        <Tab.Screen 
-          name="PersonalList" 
-          component={PersonalList} 
-          options={{
-            tabBarIcon: ({focused}) => (
-              <View style={{alignItems: "center", justifyContent: "center"}}>
-                <Entypo name="list" size={24} color="black" />
-                <Text style={{color: focused ? "#e32f45" : "#748c94", fontSize: 12}}>Personal List</Text>
-              </View>
-            )
-          }}
-        />
-        <Tab.Screen 
-          name="SharedList" 
-          component={SharedList} 
-          options={{
-            tabBarIcon: ({focused}) => (
-              <View style={{alignItems: "center", justifyContent: "center"}}>
-                <Entypo name="share" size={24} color="black" />
-                <Text style={{color: focused ? "#e32f45" : "#748c94", fontSize: 12}}>Shared List</Text>
-              </View>
-            )
-          }}
-        />
-        <Tab.Screen 
-          name="Profile" 
-          component={Profile}
-          options={{
-            tabBarIcon: ({focused}) => (
-              <View style={{alignItems: "center", justifyContent: "center"}}>
-                <FontAwesome5 name="user-tie" size={24} color="black" />
-                <Text style={{color: focused ? "#e32f45" : "#748c94", fontSize: 12}}>Profile</Text>
-              </View>
-            )
-          }}
-        />
-      </Tab.Navigator>
+      <AuthNavigator />
     </NavigationContainer>
   );
 }
