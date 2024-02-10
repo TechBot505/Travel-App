@@ -7,7 +7,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTabNavigator() {
+const BottomTabNavigator = () => {
     const screenOptions = {
         tabBarShowLabel: false,
         headerShown: false,
@@ -76,3 +76,5 @@ export default function BottomTabNavigator() {
       </Tab.Navigator>
   )
 }
+
+export default BottomTabNavigator;

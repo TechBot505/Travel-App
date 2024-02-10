@@ -1,47 +1,62 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
-import React from 'react'
-import { AntDesign } from '@expo/vector-icons';
+import { View, Text } from 'react-native'
+import { useEffect, useState } from 'react'
+import { SIZES } from '../constants/theme';
+import 'expo-dev-client';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
+import GoogleButton from '../components/GoogleButton';
 
-export default function LoginScreen({navigation}) {
+const LoginScreen = ({ navigation }) => {  
+  GoogleSignin.configure({
+    webClientId: '103457008097-qdu9v80l3ri2khpdkafh4sct879qm0vt.apps.googleusercontent.com',
+  });
+
+  // Set an initializing state whilst Firebase connects
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  // Handle user state changes
+  const onAuthStateChanged = (user) => {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber;
+  }, []);
+
+  if(user) {
+    navigation.navigate('Home');
+  } else {
+    console.log("NO USER!")
+  }
+
+  const onGoogleButtonPress = async () => {
+      await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true});
+      const { idToken } = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      const user_signin =  auth().signInWithCredential(googleCredential);
+      user_signin.then((user) => {
+        console.log('User signed in: ', user);
+      }).catch((error) => {
+        console.log('Error signing in', error);
+      });
+  }
+
+  if(initializing) return null;
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Let's Get Started!</Text>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Home")}>
-        <View style={styles.buttonContainer}>
-          <AntDesign name="google" size={32} color="white" />
-          <Text style={styles.text}>Sign In with Google</Text>
-        </View>
-      </TouchableOpacity>
+    <View style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}>
+      <Text style={{fontWeight: 'bold', fontSize: SIZES.h1}}>Welcome to WanderLust</Text>
+      <Text style={{textAlign: 'center', padding: 20, fontSize: SIZES.body4}}>Please sign in to continue</Text>
+      <GoogleButton onGoogleButtonPress={onGoogleButtonPress} />
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  heading: {
-    fontSize: 30,
-    fontWeight: "bold",
-    marginBottom: 20
-  },
-  button: {
-    padding: 10,
-    backgroundColor: "#1688fa",
-    borderRadius: 32,
-  },
-  buttonContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 10,
-    paddingHorizontal: 10
-  },
-  text: {
-    color: "#fff",
-    fontSize: 16
-  }
-})
+export default LoginScreen;

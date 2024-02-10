@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "103457008097",
+    "project_id": "travelapp-5466c",
+    "storage_bucket": "travelapp-5466c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103457008097:android:7c8b9bcb930ccb5fcf0aa0",
+        "android_client_info": {
+          "package_name": "com.rohit_505.travelapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103457008097-00j27ol1oqr836cphb9hj7jhcess0sre.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rohit_505.travelapp",
+            "certificate_hash": "a5fd5746f2e17f3617afd41bca2cc76274c5aebc"
+          }
+        },
+        {
+          "client_id": "103457008097-snge2vinf248ejuiadr6354fpq5d4rmg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rohit_505.travelapp",
+            "certificate_hash": "5ca10bcda3079535190a21aad540732048ba019b"
+          }
+        },
+        {
+          "client_id": "103457008097-qdu9v80l3ri2khpdkafh4sct879qm0vt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTSBsFGCLx_9yeahPxPswILpSUZASItqY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103457008097-qdu9v80l3ri2khpdkafh4sct879qm0vt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
