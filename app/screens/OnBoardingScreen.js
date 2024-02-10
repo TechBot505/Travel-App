@@ -1,10 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function OnBoardingScreen() {
+const OnBoardingScreen = () => {
   return (
     <View>
       <Text>OnBoardingScreen</Text>
     </View>
   )
 }
+
+export default OnBoardingScreen;

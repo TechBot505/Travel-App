@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { View, Image, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import AuthNavigator from './app/naviagations/AuthNavigator';
@@ -10,31 +9,29 @@ import { COLORS, SIZES } from './app/constants/theme';
 const slides = [
   {
     id: 1,
-    title: 'Title 1',
-    text: 'Say something cool',
+    title: 'Explore the World Awaits',
+    text: 'Embark on a journey of discovery. Swipe, plan, and create unforgettable memories with Wanderlust - your passport to a world of adventure.',
     image: onboarding1,
     backgroundColor: '#59b2ab',
   },
   {
     id: 2,
-    title: 'Title 2',
-    text: 'Other cool stuff',
+    title: 'Personalized Travel Plans',
+    text: "Tell us your interests, and we'll curate unique itineraries just for you. Whether it's cultural hotspots or hidden gems, we've got your next adventure covered.",
     image: onboarding2,
     backgroundColor: '#febe29',
   },
   {
     id: 3,
-    title: 'Rocket guy',
-    text: 'I\'m already out of descriptions\n\nLorem ipsum bla bla bla',
+    title: 'Effortless Itinerary Management',
+    text: "Plan, book, and track your trips effortlessly. From flights to accommodations, keep everything in one place for a stress-free travel experience. Your journey begins with a tap.",
     image: onboarding3,
     backgroundColor: '#22bcb5',
   }
 ];
 
-export default function App() {
+const App = () => {
   const [showHomePage, setShowHomePage] = useState(false);
-
-  // StatusBar.setBarStyle('light-content', true);
 
   const buttonLabel = (label) => {
     return (
@@ -67,7 +64,7 @@ export default function App() {
               }}
               resizeMode='contain'
             />
-            <Text style={{fontWeight: 'bold', fontSize: SIZES.h1}}>{item.title}</Text>
+            <Text style={{fontWeight: 'bold', fontSize: SIZES.h2}}>{item.title}</Text>
             <Text style={{textAlign: 'center', paddingTop: 5}}>{item.text}</Text>
           </View>
         )
@@ -86,9 +83,12 @@ export default function App() {
     />
     )
   }
+
   return (
     <NavigationContainer>
       <AuthNavigator />
     </NavigationContainer>
   );
 }
+
+export default App;
