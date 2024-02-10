@@ -5,6 +5,7 @@ import 'expo-dev-client';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import GoogleButton from '../components/GoogleButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({ navigation }) => {  
   GoogleSignin.configure({
@@ -28,6 +29,13 @@ const LoginScreen = ({ navigation }) => {
 
   if(user) {
     navigation.navigate('Home');
+    AsyncStorage.setItem(
+      "userData",
+      JSON.stringify({
+        email: user,
+        loggedIn: true
+      })
+    )
   } else {
     console.log("NO USER!")
   }
