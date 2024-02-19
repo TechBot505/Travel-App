@@ -1,14 +1,12 @@
-import {
-  View,
-  StyleSheet,
-  FlatList,
-} from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import React, { useState, useLayoutEffect } from "react";
 import AddIcon from "../components/AddIcon";
 import ChecklistItem from "../components/ChecklistItem";
+// import ItemModal from "../components/ItemModal";
 
 const CheckList = ({ navigation }) => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([{ text: "Akanksha", isChecked: false }]);
+  // const [openModal, setOpenModal] = useState(false);
 
   const addItem = (item) => {
     setItems([...items, item]);
@@ -17,18 +15,32 @@ const CheckList = ({ navigation }) => {
   const removeItem = (index) => {
     items.splice(index, 1);
     setItems([...items]);
-  }
+  };
 
   const updateItem = (index, item) => {
     items[index] = item;
     setItems([...items]);
-  }
+  };
+
+  // function renderModal() {
+  //   return (
+  //     <ItemModal
+  //       isopenModal={openModal}
+  //       onClose={() => setOpenModal(false)}
+  //       onSave={() => {
+  //         setOpenModal(false);
+  //       }}
+  //       addItem={addItem}
+  //     />
+  //   );
+  // }
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <AddIcon
-          onPress={() => addItem({ text: "", isChecked: false })}
+          // onPress={() => setOpenModal(true)}
+          onPress={() => addItem({ text: "Travelling", isChecked: false })}
         />
       ),
     });
@@ -43,6 +55,7 @@ const CheckList = ({ navigation }) => {
             <ChecklistItem
               text={text}
               isCheck={isChecked}
+              onEdit={() => setOpenModal(true)}
               onDelete={() => removeItem(index)}
               onChecked={() => {
                 const item = items[index];
@@ -54,12 +67,12 @@ const CheckList = ({ navigation }) => {
                 const item = items[index];
                 item.text = newText;
                 updateItem(index, item);
-              
               }}
             />
           );
         }}
       />
+      {/* {renderModal()} */}
     </View>
   );
 };

@@ -14,6 +14,7 @@ const ChecklistItem = ({
   onChecked,
   onChangeText,
   onDelete,
+  // onEdit
 }) => {
   const [editing, setEditing] = useState(false);
   return (
@@ -51,6 +52,17 @@ const ChecklistItem = ({
               {text}
             </Text>
           )}
+          {/* <Text
+            style={[
+              styles.itemText,
+              {
+                color: isCheck ? "black" : "white",
+                textDecorationLine: isCheck ? "line-through" : "none",
+              },
+            ]}
+          >
+            {text}
+          </Text> */}
         </TouchableOpacity>
       </View>
       <View>
