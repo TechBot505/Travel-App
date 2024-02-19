@@ -1,6 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { LoginScreen, Dashboard, PersonalList, SharedList, CheckList } from '../screens'
+import { LoginScreen, Dashboard, PersonalList, SharedList, CheckList, EditCategory } from '../screens'
+import Colors from '../constants/Colors';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,17 @@ const AuthNavigator = () => {
               headerTintColor: "white"
             }
           }} 
+        />
+        <Stack.Screen 
+          name="EditCategory" 
+          component={EditCategory}
+          options={({route})=>{
+            return {
+              title: route.params.title ? `Edit ${route.params.title} List` : 'Create New List',
+              headerStyle: {backgroundColor: route.params.color || Colors.purple},
+              headerTintColor: "white"
+            }
+          }}
         />
         <Stack.Screen name="SharedList" component={SharedList} />
     </Stack.Navigator>

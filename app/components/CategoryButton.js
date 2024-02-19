@@ -2,14 +2,14 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 
-const CategoryButton = ({title, color, onPress, onDelete}) => {
+const CategoryButton = ({title, color, onPress, onDelete, onOptions}) => {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.itemContainer, {backgroundColor: color}]}>
       <View>
         <Text style={styles.itemTitle}>{title}</Text>
       </View>
       <View style={{ flexDirection: "row" }}>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={onOptions}>
           <Ionicons name="options-outline" size={24} color="white" />
         </TouchableOpacity>
         <TouchableOpacity onPress={onDelete}>

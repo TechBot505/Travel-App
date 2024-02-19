@@ -1,33 +1,34 @@
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
-  TouchableOpacity,
 } from "react-native";
 import React, { useState, useLayoutEffect } from "react";
 import AddIcon from "../components/AddIcon";
 import ChecklistItem from "../components/ChecklistItem";
 
 const CheckList = ({ navigation }) => {
-  const [items, setItems] = useState([{ text: "Hellooo", isChecked: false }]);
+  const [items, setItems] = useState([]);
 
   const addItem = (item) => {
-    items.push(item);
-    setItems([...items]);
+    setItems([...items, item]);
   };
 
-  const toggleItem = (index) => {
-    const item = items[index];
-    item.isChecked = !item.isChecked;
+  const removeItem = (index) => {
+    items.splice(index, 1);
     setItems([...items]);
-  };
+  }
+
+  const updateItem = (index, item) => {
+    items[index] = item;
+    setItems([...items]);
+  }
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <AddIcon
-          onPress={() => addItem({ text: "Akanksha", isChecked: false })}
+          onPress={() => addItem({ text: "", isChecked: false })}
         />
       ),
     });
@@ -42,8 +43,19 @@ const CheckList = ({ navigation }) => {
             <ChecklistItem
               text={text}
               isCheck={isChecked}
-              onChecked={() => toggleItem(index)}
+              onDelete={() => removeItem(index)}
+              onChecked={() => {
+                const item = items[index];
+                item.isChecked = !item.isChecked;
+                updateItem(index, item);
+              }}
               key={index}
+              onChangeText={(newText) => {
+                const item = items[index];
+                item.text = newText;
+                updateItem(index, item);
+              
+              }}
             />
           );
         }}

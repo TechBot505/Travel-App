@@ -1,8 +1,21 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
+import React, { useState } from "react";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 
-const ChecklistItem = ({ text, isCheck, onChecked }) => {
+const ChecklistItem = ({
+  text,
+  isCheck,
+  onChecked,
+  onChangeText,
+  onDelete,
+}) => {
+  const [editing, setEditing] = useState(false);
   return (
     <View style={styles.outerContainer}>
       <View style={styles.container}>
@@ -13,12 +26,35 @@ const ChecklistItem = ({ text, isCheck, onChecked }) => {
             color="white"
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
-          <Text style={styles.itemText}>{text}</Text>
+        <TouchableOpacity onPress={() => !isCheck && setEditing(true)}>
+          {editing ? (
+            <TextInput
+              autoFocus={true}
+              value={text}
+              onChangeText={onChangeText}
+              placeholder="Enter item"
+              onSubmitEditing={() => {}}
+              maxLength={30}
+              style={styles.itemText}
+              onBlur={() => setEditing(false)}
+            />
+          ) : (
+            <Text
+              style={[
+                styles.itemText,
+                {
+                  color: isCheck ? "black" : "white",
+                  textDecorationLine: isCheck ? "line-through" : "none",
+                },
+              ]}
+            >
+              {text}
+            </Text>
+          )}
         </TouchableOpacity>
       </View>
       <View>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={onDelete}>
           <Ionicons name="trash" size={24} color="white" />
         </TouchableOpacity>
       </View>
@@ -29,10 +65,9 @@ const ChecklistItem = ({ text, isCheck, onChecked }) => {
 export default ChecklistItem;
 
 const styles = StyleSheet.create({
-  itemText: { 
-    fontSize: 18, 
-    padding: 5, 
-    color: "white"
+  itemText: {
+    fontSize: 18,
+    padding: 5,
   },
   container: {
     flex: 1,
@@ -52,6 +87,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 10,
     padding: 10,
-    backgroundColor: "blue",
+    backgroundColor: "#3498db",
   },
 });
