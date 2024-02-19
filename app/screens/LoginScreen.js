@@ -27,17 +27,23 @@ const LoginScreen = ({ navigation }) => {
     return subscriber;
   }, []);
 
-  if(user) {
-    navigation.navigate('Home');
+  useEffect(() => {
+    if(user) {
+      googleLoginSuccess();
+    } else {
+      console.log("NO USER!")
+    }
+  }, [])
+
+  const googleLoginSuccess = () => {
     AsyncStorage.setItem(
-      "userData",
-      JSON.stringify({
-        email: user,
-        loggedIn: true
-      })
-    )
-  } else {
-    console.log("NO USER!")
+        "userData",
+        JSON.stringify({
+          user: user,
+          loggedIn: true
+        })
+      );
+    navigation.navigate('Dashboard');
   }
 
   const onGoogleButtonPress = async () => {
@@ -47,6 +53,8 @@ const LoginScreen = ({ navigation }) => {
       const user_signin =  auth().signInWithCredential(googleCredential);
       user_signin.then((user) => {
         console.log('User signed in: ', user);
+        setUser(user);
+        googleLoginSuccess();
       }).catch((error) => {
         console.log('Error signing in', error);
       });

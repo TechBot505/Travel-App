@@ -5,6 +5,7 @@ import { useState } from 'react';
 import AppIntroSlider from 'react-native-app-intro-slider'
 import { onboarding1, onboarding2, onboarding3 } from './app/constants/images';
 import { COLORS, SIZES } from './app/constants/theme';
+import Colors from './app/constants/Colors';
 
 const slides = [
   {
@@ -70,7 +71,7 @@ const App = () => {
         )
       }}
       activeDotStyle={{
-        backgroundColor: COLORS.primary,
+        backgroundColor: Colors.blue,
         width: 30
       }}
       showSkipButton
