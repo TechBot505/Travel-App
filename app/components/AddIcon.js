@@ -2,10 +2,10 @@ import { TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
 import { FontAwesome6 } from "@expo/vector-icons";
 
-const AddIcon = ({ onPress }) => {
+const AddIcon = ({ onPress, icon, color }) => {
   return (
     <TouchableOpacity style={styles.icon} onPress={onPress}>
-      <FontAwesome6 name="plus" size={20} color="black" />
+      <FontAwesome6 name={icon} size={20} color={color} />
     </TouchableOpacity>
   );
 };

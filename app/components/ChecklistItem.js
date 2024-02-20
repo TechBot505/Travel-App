@@ -14,9 +14,10 @@ const ChecklistItem = ({
   onChecked,
   onChangeText,
   onDelete,
+  isNewItem
   // onEdit
 }) => {
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(isNewItem);
   return (
     <View style={styles.outerContainer}>
       <View style={styles.container}>
@@ -44,7 +45,7 @@ const ChecklistItem = ({
               style={[
                 styles.itemText,
                 {
-                  color: isCheck ? "black" : "white",
+                  color: isCheck ? "#1a1a1a" : "white",
                   textDecorationLine: isCheck ? "line-through" : "none",
                 },
               ]}

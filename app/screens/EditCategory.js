@@ -11,16 +11,16 @@ import { CommonActions } from "@react-navigation/native";
 import ColorSelector from "../components/ColorSelector";
 
 const colorList = [
-    "blue",
-    "green",
-    "orange",
-    "purple",
-    "red",
-    "yellow",
-    "lightGray",
-    "teal",
-    "pink",
-    "olive"
+  "blue",
+  "green",
+  "orange",
+  "purple",
+  "red",
+  "yellow",
+  "lightGray",
+  "teal",
+  "pink",
+  "olive",
 ];
 
 const EditCategory = ({ navigation, route }) => {
@@ -30,30 +30,32 @@ const EditCategory = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Text style={styles.heading}>Category Name</Text>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={(text) => {
-            setTitle(text);
-            setIsValid(true);
-          }}
-          value={title}
-          placeholder="Enter Category Name"
-          autoFocus={true}
-          maxLength={30}
-        />
-      </View>
-      <View>
-        <Text style={styles.heading}>Choose Color</Text>
-        <ColorSelector
-          selectedColor={color}
-          onSelect={(color) => {
-            setColor(color);
-            navigation.dispatch(CommonActions.setParams({ color }));
-          }}
-          colorOptions={colorList}
-        />
+      <View style={{justifyContent: 'center', gap: 5}}>
+        <View>
+          <Text style={styles.heading}>Category Name:</Text>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={(text) => {
+              setTitle(text);
+              setIsValid(true);
+            }}
+            value={title}
+            placeholder="Enter Category Name"
+            autoFocus={true}
+            maxLength={30}
+          />
+        </View>
+        <View>
+          <Text style={styles.heading}>Choose Color:</Text>
+          <ColorSelector
+            selectedColor={color}
+            onSelect={(color) => {
+              setColor(color);
+              navigation.dispatch(CommonActions.setParams({ color }));
+            }}
+            colorOptions={colorList}
+          />
+        </View>
       </View>
       <TouchableOpacity
         onPress={() => {
@@ -105,6 +107,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
     margin: 5,
-    flex: 1,
+    width: '90%'
   },
 });

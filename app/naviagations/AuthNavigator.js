@@ -9,11 +9,13 @@ const AuthNavigator = () => {
   return (
     <Stack.Navigator initialRouteName='Login' screenOptions={{
       headerStyle: {
-        backgroundColor: '#87dffa',
+        backgroundColor: Colors.base,
       },
+      headerTintColor: "white"
     }}>
         <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
         <Stack.Screen name="Dashboard" component={Dashboard} options={{
+          headerLeft: null
         }} />
         <Stack.Screen name="PersonalList" component={PersonalList} />
         <Stack.Screen 
