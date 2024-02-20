@@ -1,4 +1,7 @@
 export default {
+    primary: "#292C6D",
+    secondary: "#9b85e9",
+    base: "#6D57BD",
     black: "#333",
     darkGray: "#555",
     gray: "#888",
@@ -13,4 +16,5 @@ export default {
     pink: "#fd79a8",
     olive: "#badc58",
     yellow: "#f9ca24",
+    white: "#fff",
   };

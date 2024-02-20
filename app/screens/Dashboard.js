@@ -1,9 +1,12 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import auth from "@react-native-firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { sketch, hum } from "../constants/images";
+import { home, personal, shared } from "../constants/images";
 import Block from "../components/Blocks";
+import AddIcon from "../components/AddIcon";
+import Colors from "../constants/Colors";
+import { FontAwesome } from '@expo/vector-icons';
 
 const Dashboard = ({ navigation }) => {
   const [userDetails, setUserDetails] = useState();
@@ -27,51 +30,34 @@ const Dashboard = ({ navigation }) => {
     navigation.navigate("Login");
   };
 
-  return (
-    <View>
-      <View
-        style={{
-          width: "100%",
-          alignItems: "flex-end",
-          paddingHorizontal: 20,
-          paddingTop: 10,
-        }}
-      >
-        <TouchableOpacity onPress={() => logout()}>
-          <View
-            style={{
-              paddingHorizontal: 10,
-              paddingVertical: 12,
-              borderRadius: 10,
-              marginTop: 30,
-              backgroundColor: "#8f6ce0",
-            }}
-          >
-            <Image source={hum} style={{ height: 15, width: 20 }} />
-          </View>
-        </TouchableOpacity>
-      </View>
-      <Text
-        style={{
-          paddingHorizontal: 20,
-          fontSize: 35,
-          paddingTop: 60,
-          fontWeight: "bold",
-          color: "black",
-        }}
-      >
-        Welcome {userDetails?.displayName}
-      </Text>
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <AddIcon icon="power-off" color="white" onPress={() => logout()} />
+      ),
+    });
+  });
 
+  return (
+    <View style={styles.container}>
+      <View style={styles.headingContainer}>
+        <View style={{marginLeft: 15}}>
+      <FontAwesome name="plane" size={32} color="white" />
+      </View>
+      <Text style={styles.text}>Welcome {userDetails?.displayName}!</Text>
+      </View>
+      <Image source={home} style={{ width: "100%", height: 250 }} />
       <Block
         title="Personal Lists"
-        img={sketch}
+        img={personal}
         buttonName="Explore"
+        icon="list-check"
         onPress={() => navigation.navigate("PersonalList")}
       />
       <Block
         title="Shared Lists"
-        img={sketch}
+        img={shared}
+        icon ="table-list"
         buttonName="Create a List"
         onPress={() => navigation.navigate("SharedList")}
       />
@@ -80,6 +66,28 @@ const Dashboard = ({ navigation }) => {
 };
 
 export default Dashboard;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.white,
+  },
+  text: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: Colors.white,
+    padding: 20,
+  },
+  headingContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: -5,
+    backgroundColor: Colors.primary,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  }
+});
 
 // userDetails.user.email
 // userDetails.user.displayName

@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import Colors from "../constants/Colors";
 
 const CategoryButton = ({title, color, onPress, onDelete, onOptions}) => {
   return (
@@ -8,7 +9,7 @@ const CategoryButton = ({title, color, onPress, onDelete, onOptions}) => {
       <View>
         <Text style={styles.itemTitle}>{title}</Text>
       </View>
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: "row", gap: 5 }}>
         <TouchableOpacity onPress={onOptions}>
           <Ionicons name="options-outline" size={24} color="white" />
         </TouchableOpacity>
@@ -23,7 +24,7 @@ const CategoryButton = ({title, color, onPress, onDelete, onOptions}) => {
 export default CategoryButton;
 
 const styles = StyleSheet.create({
-  itemTitle: { fontSize: 24, padding: 5, color: "white" },
+  itemTitle: { fontSize: 24, padding: 5, color: Colors.white },
   itemContainer: {
     flexDirection: "row",
     justifyContent: "space-between",

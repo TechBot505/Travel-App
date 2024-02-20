@@ -40,7 +40,9 @@ const CheckList = ({ navigation }) => {
       headerRight: () => (
         <AddIcon
           // onPress={() => setOpenModal(true)}
-          onPress={() => addItem({ text: "Travelling", isChecked: false })}
+          icon="plus"
+          color="white"
+          onPress={() => addItem({ text: "", isChecked: false, isNewItem: true})}
         />
       ),
     });
@@ -50,11 +52,12 @@ const CheckList = ({ navigation }) => {
     <View style={styles.container}>
       <FlatList
         data={items}
-        renderItem={({ item: { text, isChecked }, index }) => {
+        renderItem={({ item: { text, isChecked, isNewItem }, index }) => {
           return (
             <ChecklistItem
               text={text}
               isCheck={isChecked}
+              isNewItem={isNewItem}
               onEdit={() => setOpenModal(true)}
               onDelete={() => removeItem(index)}
               onChecked={() => {
