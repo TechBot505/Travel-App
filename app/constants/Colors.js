@@ -2,19 +2,21 @@ export default {
     primary: "#292C6D",
     secondary: "#9b85e9",
     base: "#6D57BD",
+
     black: "#333",
-    darkGray: "#555",
-    gray: "#888",
-    lightGray: "#aaa",
-    teal: "#1abc9c",
-    green: "#2ecc71",
-    blue: "#3498db",
-    purple: "#9b59b6",
-    blueGray: "#34495e",
-    orange: "#e67e22",
-    red: "#e74c3c",
-    pink: "#fd79a8",
-    olive: "#badc58",
-    yellow: "#f9ca24",
     white: "#fff",
+
+    darkGray: "#555",
+    lightGray: "#aaa",
+
+    blue: "#3498db", //
+    yellow: "#FFE382", //
+    pink: "#FFB0B0", //
+    red: "#FF6868", //
+    maroon: "#860A35", //
+    teal: "#468B97", //
+    purple: "#6D57BD", //
+    green: "#A8DF8E", //
+    orange: "#F9B572", //
+    blueGray: "#365486", //
   };

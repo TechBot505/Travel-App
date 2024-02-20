@@ -10,22 +10,22 @@ import Colors from "../constants/Colors";
 import { CommonActions } from "@react-navigation/native";
 import ColorSelector from "../components/ColorSelector";
 
-const colorList = [
-  "blue",
-  "green",
-  "orange",
-  "purple",
-  "red",
-  "yellow",
-  "lightGray",
-  "teal",
-  "pink",
-  "olive",
+const colorCodeList = [
+  "#3498db",
+  "#FFE382",
+  "#FFB0B0",
+  "#FF6868",
+  "#860A35",
+  "#468B97",
+  "#6D57BD", 
+  "#A8DF8E",
+  "#F9B572",
+  "#365486",
 ];
 
 const EditCategory = ({ navigation, route }) => {
   const [title, setTitle] = useState(route.params.title || "");
-  const [color, setColor] = useState(route.params.color || Colors.purple);
+  const [color, setColor] = useState(route.params.color || Colors.base);
   const [isValid, setIsValid] = useState(true);
 
   return (
@@ -53,7 +53,7 @@ const EditCategory = ({ navigation, route }) => {
               setColor(color);
               navigation.dispatch(CommonActions.setParams({ color }));
             }}
-            colorOptions={colorList}
+            colorOptions={colorCodeList}
           />
         </View>
       </View>
@@ -71,10 +71,10 @@ const EditCategory = ({ navigation, route }) => {
           style={{
             fontSize: 18,
             color: "white",
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.primary,
             padding: 10,
             textAlign: "center",
-            borderRadius: 5,
+            borderRadius: 14,
             margin: 5,
           }}
         >
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    borderColor: "gray",
+    borderColor: Colors.lightGray,
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,

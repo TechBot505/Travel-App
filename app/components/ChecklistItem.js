@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
+import Colors from "../constants/Colors";
 
 const ChecklistItem = ({
   text,
@@ -18,6 +19,7 @@ const ChecklistItem = ({
   // onEdit
 }) => {
   const [editing, setEditing] = useState(isNewItem);
+
   return (
     <View style={styles.outerContainer}>
       <View style={styles.container}>
@@ -45,7 +47,7 @@ const ChecklistItem = ({
               style={[
                 styles.itemText,
                 {
-                  color: isCheck ? "#1a1a1a" : "white",
+                  color: isCheck ? Colors.primary : "white",
                   textDecorationLine: isCheck ? "line-through" : "none",
                 },
               ]}
@@ -96,10 +98,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     height: 60,
-    borderRadius: 20,
+    borderRadius: 14,
     marginHorizontal: 20,
     marginVertical: 10,
     padding: 10,
-    backgroundColor: "#3498db",
+    backgroundColor: Colors.secondary,
+    borderWidth:3,
+    borderColor: Colors.base
   },
 });

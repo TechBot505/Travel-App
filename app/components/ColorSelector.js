@@ -1,6 +1,5 @@
 import { View, StyleSheet } from 'react-native'
 import React from 'react'
-import Colors from '../constants/Colors';
 import ColorButton from './ColorButton';
 
 const ColorSelector = ({selectedColor, colorOptions, onSelect}) => {
@@ -10,9 +9,9 @@ const ColorSelector = ({selectedColor, colorOptions, onSelect}) => {
         return (
           <ColorButton
             key={colorName}
-            color={Colors[colorName]}
+            color={colorName}
             isSelected={colorName === selectedColor}
-            onPress={() => onSelect(colorName)}
+            onPress={() => {onSelect(colorName)}}
           />
         )
       })}

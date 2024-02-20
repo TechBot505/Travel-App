@@ -4,7 +4,7 @@ export const onboarding3 = require("../assets/images/onboardScreen3.png");
 export const home = require("../assets/images/home.jpg");
 export const personal = require("../assets/images/personal.png");
 export const shared = require("../assets/images/shared.png");
-
+export const login = require("../assets/images/login.jpg");
 
 export default {
     onboarding1,
@@ -12,5 +12,6 @@ export default {
     onboarding3,
     home,
     personal,
-    shared
+    shared,
+    login
 }

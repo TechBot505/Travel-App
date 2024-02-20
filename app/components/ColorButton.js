@@ -8,7 +8,7 @@ const ColorButton = ({ onPress, isSelected, color }) => {
       onPress={onPress}
       style={[
         styles.colorButton,
-        { borderWidth: isSelected ? 4 : 0, backgroundColor: color },
+        { borderWidth: isSelected ? 3 : 0, backgroundColor: color },
       ]}
     />
   );
@@ -18,10 +18,10 @@ export default ColorButton;
 
 const styles = StyleSheet.create({
   colorButton: {
-    width: 40,
-    height: 40,
+    width: 42,
+    height: 42,
     borderRadius: 24,
     margin: 10,
-    borderColor: Colors.darkGray,
+    borderColor: Colors.lightGray,
   },
 });

@@ -6,8 +6,8 @@ import AddIcon from "../components/AddIcon";
 
 const PersonalList = ({ navigation }) => {
   const [categories, setCategories] = useState([
-    { title: "Documents", color: Colors.purple },
-    { title: "Jwellery", color: Colors.olive },
+    { title: "Documents", color: Colors.blueGray },
+    { title: "Jwellery", color: Colors.pink},
     { title: "Clothes", color: Colors.teal },
   ]);
 
@@ -31,7 +31,7 @@ const PersonalList = ({ navigation }) => {
       headerRight: () => (
         <AddIcon
           icon="plus"
-          color="black"
+          color="white"
           onPress={() =>
             navigation.navigate("EditCategory", { saveChanges: addCategory })
           }
